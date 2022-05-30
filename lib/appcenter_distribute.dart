@@ -167,29 +167,34 @@ class AppCenterDistribute {
       if(dialogUpdateSingle == null){
         dialogUpdateSingle = await showDialog(
             context: context,
+            barrierDismissible: (_requestResult['mandatory_update'] == false),
             builder: (BuildContext ctx) {
-              return UpdateDialog(
-                mandatoryUpdate: _requestResult['mandatory_update'],
-                title: '${dialog['title']}',
-                subTitle: dialog['subTitle'] ?? '',
-                content: content,
-                confirmButtonText: dialog['confirmButtonText']!,
-                middleButtonText: dialog['middleButtonText']!,
-                cancelButtonText: dialog['cancelButtonText']!,
-                onMiddle: () async{
-                  if(Platform.isIOS && betaUrl.isNotEmpty){
-                    updateAppForBeta();
-                  }
-                },
-                onConfirm: () async{
-                  await _progress.show();
-                  if(Platform.isAndroid){
-                    updateAppForAndroid();
-                  }else{
-                    await _progress.hide();
-                    updateAppForIOS();
-                  }
-                },
+              return WillPopScope(
+                onWillPop: () async =>
+                  (_requestResult['mandatory_update'] == false),
+                child: UpdateDialog(
+                  mandatoryUpdate: _requestResult['mandatory_update'],
+                  title: '${dialog['title']}',
+                  subTitle: dialog['subTitle'] ?? '',
+                  content: content,
+                  confirmButtonText: dialog['confirmButtonText']!,
+                  middleButtonText: dialog['middleButtonText']!,
+                  cancelButtonText: dialog['cancelButtonText']!,
+                  onMiddle: () async{
+                    if(Platform.isIOS && betaUrl.isNotEmpty){
+                      updateAppForBeta();
+                    }
+                  },
+                  onConfirm: () async{
+                    await _progress.show();
+                    if(Platform.isAndroid){
+                      updateAppForAndroid();
+                    }else{
+                      await _progress.hide();
+                      updateAppForIOS();
+                    }
+                  },
+                ),
               );
             }
         );
