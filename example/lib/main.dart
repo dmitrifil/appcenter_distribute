@@ -62,9 +62,10 @@ class _MainState extends State<Main> {
       appSecretIOS: '6c3a2ab7-386f-4605-8978-0300b6461c63',//'Your iOS App Secret'
       tokenAndroid: 'c03dc79718321b4e8cbaabc04a95fcdb792adde3',//'Your Android Token'
       tokenIOS: '2b8c5602e3caf419563069b0c161cd5c04ff20f2',//'Your iOS Token',
-      appIdIOS: '',
-      betaUrlIOS: 'itms-beta://',
-      usePrivateTrack: false,
+      groupIdAndroid: 'abed0875-951a-4bc6-8f0e-dfd2ffcb686f',
+      groupIdIOS: '4507b530-e3ca-405d-965e-00d6df8eebc8',
+      installUrlAndroid: 'https://install.appcenter.ms/users/dmitrifil-gmail.com/apps/appcenter/distribution_groups/all%20users',
+      installUrlIOS: 'https://install.appcenter.ms/users/dmitrifil-gmail.com/apps/appcenter-ios/distribution_groups/all%20users',
     );
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
@@ -84,16 +85,11 @@ class _MainState extends State<Main> {
 
 Future<bool> checkForUpdate(BuildContext context) async{
   return await AppCenterDistribute.checkForUpdate(
-      context,
-      downloadUrlAndroid: '',
-      dialog: {
-        'title': 'App Update Avaiable',
-        'subTitle': 'Enjoy the lastest version',
-        'content': 'There is a new version available with the most advanced features, please click confirm to upgrade!',
-        // 'middleButtonText': 'TestFlight', // only support iOS
-        'confirmButtonText': 'Store',
-        'cancelButtonText': 'Postpone',
-        'downloadingText': 'Downloading File...'
-      }
+    context,
+      title: 'App Update Avaiable',
+      subTitle: 'Enjoy the lastest version',
+      content: 'There is a new version available with the most advanced features, please click confirm to upgrade!',
+      confirmButtonText: 'Install',
+      cancelButtonText: 'Skip',
   );
 }

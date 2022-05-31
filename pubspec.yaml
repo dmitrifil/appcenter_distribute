@@ -11,17 +11,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  android_metadata: ^0.2.1
-  dio: ^3.0.9
-  install_plugin: ^2.0.1
+  dio: ^4.0.6
   package_info: ^2.0.2
-  path_provider: ^2.0.10
-#  permission_handler: ^5.0.1+1
-  permission_handler: ^9.2.0
-  progress_dialog: ^1.2.4
-#  url_launcher: ^5.4.11
   url_launcher: ^6.1.2
-  open_appstore: ^1.0.2
 
 dev_dependencies:
   flutter_test:

@@ -1,6 +1,3 @@
-import 'dart:io';
-import 'package:flutter/foundation.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:dio/dio.dart';
 import 'package:appcenter_distribute/comment/configs.dart';
 
@@ -39,33 +36,7 @@ class Dao {
         return response.data;
       }
     } on DioError catch (e) {
-      throw e.response != null ? e.response.data['message'] : e.message;
-    }
-  }
-
-  Future<File> downloadAndroid(String url,Function(int, int) showDownloadProgress) async {
-    Directory storageDir = (await getExternalStorageDirectory())!;
-    String storagePath = storageDir.path;
-    File file = File('$storagePath/download_app');
-
-    if (!file.existsSync()) {
-      file.createSync();
-    }
-
-    try {
-      Response response = await dio.get(  
-        url,
-        onReceiveProgress: showDownloadProgress,
-        options: Options(
-          responseType: ResponseType.bytes,
-          followRedirects: false,
-        )
-      );
-      file.writeAsBytesSync(response.data);
-      return file;
-    } catch (e) {
-      debugPrint('$e');
-      rethrow;
+      throw e.response != null ? e.response!.data['message'] : e.message;
     }
   }
 }

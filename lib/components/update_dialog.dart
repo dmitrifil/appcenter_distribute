@@ -11,9 +11,9 @@ class UpdateDialog extends StatelessWidget {
     this.onMiddle,
     this.subTitle = '',
     this.mandatoryUpdate = false,
-    this.confirmButtonText = 'Confirm',
-    this.middleButtonText = 'Confirm',
-    this.cancelButtonText = 'Postpone',
+    this.confirmButtonText = '',
+    this.middleButtonText = '',
+    this.cancelButtonText = '',
     this.onCancel,
   }): super(key: key);
 
